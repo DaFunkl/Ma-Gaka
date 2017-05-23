@@ -12,7 +12,7 @@ import javax.activation.UnsupportedDataTypeException;
 public class Mat {
 	int n;
 	int m;
-	int[][] mat;
+	double[][] mat;
 
 	/**
 	 * constructor empty m x n matrix
@@ -22,7 +22,7 @@ public class Mat {
 	public Mat(int m, int n) {
 		this.n = n;
 		this.m = m;
-		mat = new int[m][n];
+		mat = new double[m][n];
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class Mat {
 	 * @param m
 	 * @param mat
 	 */
-	public Mat(int[][] mat) {
+	public Mat(double[][] mat) {
 		this.mat = mat;
 		this.m = mat.length;
 		this.n = mat[1].length;
@@ -47,7 +47,7 @@ public class Mat {
 	 */
 	public Mat(int[] p) {
 		n = p.length;
-		mat = new int[n][n];
+		mat = new double[n][n];
 		m = n;
 		int i = 0;
 		for (int x : p) {
@@ -60,28 +60,25 @@ public class Mat {
 	 * 
 	 * @param b
 	 * @return
-	 * @throws UnsupportedDataTypeException 
+	 * @throws UnsupportedDataTypeException
 	 */
-	
+
 	public Mat mult(Mat b) throws UnsupportedDataTypeException {
-		if(this.n != b.m)
-			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
-		Mat c = new Mat(this.m,b.n);
-		
-		
-		//slow, very slow
-		for(int k = 0;k < this.n;k++){
-		for (int i = 0; i<this.m;i++){
-			for(int j = 0 ;j < b.n;j++){
-					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
+		if (this.n != b.m)
+			throw new UnsupportedDataTypeException("Wrong dimensions " + this.n + " != " + b.m);
+		Mat c = new Mat(this.m, b.n);
+
+		// slow, very slow
+		for (int k = 0; k < this.n; k++) {
+			for (int i = 0; i < this.m; i++) {
+				for (int j = 0; j < b.n; j++) {
+					c.mat[i][j] += this.mat[i][k] * b.mat[k][j];
 				}
 			}
 		}
 		return c;
 	}
-	
 
-	
 	/**
 	 * creates identity matrix with this matrix dimensions
 	 * 
@@ -103,28 +100,53 @@ public class Mat {
 	 * @return
 	 */
 	public Mat inv() {
-		int[][] x = mat;
+		double[][] x = mat;
 		Mat p = identity(n);
+		double u;
+		double d;
+		for (int i = 0; i < n; i++) { // traversing top -> down
+			u = x[i][i];
+			for (int k = 0; k < n - 1; k++) { // creating zeros
+				d = x[k][i];
+				if (d == 0)
+					break;
+				for (int j = 0; j < m; j++) { // applying to complete row
+					if (i != k) { // not needed to deploy calc to same row
+						// only start applying to x at width equals to current
+						// row
+						if (j >= i) {
+							x[k][j] = (x[i][j] * d * -1) + (x[k][j] * u);
+						}
+						p.mat[k][j] = (p.mat[i][j] * d * -1) + (p.mat[k][j] * u);
+					} else
+						break;
+					System.out.println("p:\n" + p.toString());
+					System.out.println("x:\n" + matString(x, m, n));
 
-		for (int i = 0; i < n; i++) {
-
+				}
+			}
 		}
-
 		return p;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("{\n");
+		return matString(mat, m, n);
+	}
+
+	public static String matString(double[][] mat, int m, int n) {
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
-				sb.append("\t");
+				if (j != 0)
+					sb.append("\t");
+				else
+					sb.append("|");
 				sb.append(mat[i][j]);
 				sb.append(",");
 			}
-			sb.append("\n");
+			sb.append("|\n");
 		}
-		sb.append("}");
 		return sb.toString();
 	}
 
