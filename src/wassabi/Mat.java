@@ -1,5 +1,7 @@
 package wassabi;
 
+import javax.activation.UnsupportedDataTypeException;
+
 /**
  * 
  * @author PakaBelly
@@ -16,10 +18,10 @@ public class Mat {
 	 * constructor empty m x n matrix
 	 * @param i
 	 */
-	public Mat(int i) {
-		n = i;
-		m = i;
-		mat = new int[i][i];
+	public Mat(int m, int n) {
+		this.n = n;
+		this.m = m;
+		mat = new int[m][n];
 	}
 
 	/**
@@ -29,10 +31,10 @@ public class Mat {
 	 * @param m
 	 * @param mat
 	 */
-	public Mat(int n, int m, int[][] mat) {
+	public Mat(int[][] mat) {
 		this.mat = mat;
-		this.m = m;
-		this.n = n;
+		this.m = mat.length;
+		this.n = mat[1].length;
 	}
 
 	/**
@@ -56,14 +58,93 @@ public class Mat {
 	 * multiplies this matrix with b
 	 * @param b
 	 * @return
+	 * @throws UnsupportedDataTypeException 
 	 */
-	public Mat mult(Mat b) {
-		// asdasdasdad nonsesensensnesnense
-		Mat ret = new Mat(b.mat[0]);
-
-		return ret;
+	public Mat multA(Mat b) throws UnsupportedDataTypeException {
+		if(this.n != b.m)
+			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
+		Mat c = new Mat(this.m,b.n);
+		
+		
+		//slow, very slow
+		for (int i = 0; i<this.m;i++){
+			for(int j = 0 ;j < b.n;j++){
+				for(int k = 0;k < this.n;k++){
+					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
+				}
+			}
+		}
+		return c;
+	}
+	
+	public Mat multB(Mat b) throws UnsupportedDataTypeException {
+		if(this.n != b.m)
+			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
+		Mat c = new Mat(this.m,b.n);
+		
+		
+		//slow, very slow
+		for(int k = 0;k < this.n;k++){
+			for(int j = 0 ;j < b.n;j++){
+				for (int i = 0; i<this.m;i++){
+					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
+				}
+			}
+		}
+		return c;
+	}
+	
+	public Mat multC(Mat b) throws UnsupportedDataTypeException {
+		if(this.n != b.m)
+			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
+		Mat c = new Mat(this.m,b.n);
+		
+		
+		//slow, very slow
+		for(int k = 0;k < this.n;k++){
+		for (int i = 0; i<this.m;i++){
+			for(int j = 0 ;j < b.n;j++){
+					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
+				}
+			}
+		}
+		return c;
+	}
+	
+	public Mat multD(Mat b) throws UnsupportedDataTypeException {
+		if(this.n != b.m)
+			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
+		Mat c = new Mat(this.m,b.n);
+		
+		
+		//slow, very slow
+		for (int i = 0; i<this.m;i++){
+			for(int k = 0;k < this.n;k++){
+				for(int j = 0 ;j < b.n;j++){
+					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
+				}
+			}
+		}
+		return c;
 	}
 
+	public Mat multE(Mat b) throws UnsupportedDataTypeException {
+		if(this.n != b.m)
+			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
+		Mat c = new Mat(this.m,b.n);
+		
+		
+		//slow, very slow
+		for(int j = 0 ;j < b.n;j++){
+			for(int k = 0;k < this.n;k++){
+				for (int i = 0; i<this.m;i++){
+					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
+				}
+			}
+		}
+		return c;
+	}
+	
 	/**
 	 * creates identity matrix with this matrix dimensions
 	 * @param n
