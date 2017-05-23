@@ -44,8 +44,10 @@ public class Mat {
 	public Mat(int[] p) {
 		n = p.length;
 		mat = new int[n][n];
+		m = n;
 		int i = 0;
 		for (int x : p) {
+			System.out.println("i: "+i+", x: "+x);
 			mat[i++][x] = 1;
 		}
 	}
@@ -89,5 +91,20 @@ public class Mat {
 		}
 		
 		return p;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb  = new StringBuilder("{\n");
+		for(int i = 0; i < m; i++){
+			for(int j = 0; j < n; j++){
+				sb.append("\t");
+				sb.append(mat[i][j]);
+				sb.append(",");
+			}	
+			sb.append("\n");
+		}
+		sb.append("}");
+		return sb.toString();
 	}
 }
