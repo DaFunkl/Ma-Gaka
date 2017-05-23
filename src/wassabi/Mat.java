@@ -1,11 +1,12 @@
 package wassabi;
 
+import java.util.Arrays;
+
 /**
  * 
  * @author PakaBelly
  *
- * mat is represented as m x n Matrix
- * --> int[m][n]
+ *         mat is represented as m x n Matrix --> int[m][n]
  */
 public class Mat {
 	int n;
@@ -14,6 +15,7 @@ public class Mat {
 
 	/**
 	 * constructor empty m x n matrix
+	 * 
 	 * @param i
 	 */
 	public Mat(int i) {
@@ -23,8 +25,9 @@ public class Mat {
 	}
 
 	/**
-	 * constructor m x n  and inits it with mat
-	 * use with care, since it's not looking for faulty input
+	 * constructor m x n and inits it with mat use with care, since it's not
+	 * looking for faulty input
+	 * 
 	 * @param n
 	 * @param m
 	 * @param mat
@@ -36,9 +39,9 @@ public class Mat {
 	}
 
 	/**
-	 * constructor for permutation matrix
-	 * p contains the pasitions of 1 for matrix
-	 * 1 are set from top to buttom
+	 * constructor for permutation matrix p contains the pasitions of 1 for
+	 * matrix 1 are set from top to buttom
+	 * 
 	 * @param p
 	 */
 	public Mat(int[] p) {
@@ -47,13 +50,13 @@ public class Mat {
 		m = n;
 		int i = 0;
 		for (int x : p) {
-			System.out.println("i: "+i+", x: "+x);
 			mat[i++][x] = 1;
 		}
 	}
 
 	/**
 	 * multiplies this matrix with b
+	 * 
 	 * @param b
 	 * @return
 	 */
@@ -66,12 +69,13 @@ public class Mat {
 
 	/**
 	 * creates identity matrix with this matrix dimensions
+	 * 
 	 * @param n
 	 * @return
 	 */
-	public static Mat identity(int n){
+	public static Mat identity(int n) {
 		int[] p = new int[n];
-		for(int  i = 0; i < n; i++){
+		for (int i = 0; i < n; i++) {
 			p[i] = i;
 		}
 		return new Mat(p);
@@ -79,6 +83,7 @@ public class Mat {
 
 	/**
 	 * return invers of this matrix
+	 * 
 	 * @param n
 	 * @return
 	 */
@@ -86,25 +91,36 @@ public class Mat {
 		int[][] x = mat;
 		Mat p = identity(n);
 
-		for(int i = 0; i < n; i++){
-			
+		for (int i = 0; i < n; i++) {
+
 		}
-		
+
 		return p;
 	}
-	
+
 	@Override
 	public String toString() {
-		StringBuilder sb  = new StringBuilder("{\n");
-		for(int i = 0; i < m; i++){
-			for(int j = 0; j < n; j++){
+		StringBuilder sb = new StringBuilder("{\n");
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
 				sb.append("\t");
 				sb.append(mat[i][j]);
 				sb.append(",");
-			}	
+			}
 			sb.append("\n");
 		}
 		sb.append("}");
 		return sb.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj.getClass() == this.getClass()) {
+			Mat o = (Mat) obj;
+			if (o.m == m && o.n == n) {
+				return Arrays.deepEquals(mat, o.mat);
+			}
+		}
+		return false;
 	}
 }
