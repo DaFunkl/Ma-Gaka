@@ -7,7 +7,15 @@ public class Main {
 		Mat a  = new Mat(new int[]{1,0,2});
 		System.out.println(a.toString());
 		System.out.println(a.identity(3));
+		gausTest();
 				
+	}
+	
+	public static void gausTest(){
+		int[][] p = new int[][]{{1,2,0},{2,4,1},{2,1,0}};
+		Mat a = new Mat(p);
+		Gaus g = Gaus.calculateGaus(a, Mat.identity(3));
+		System.out.println(g);
 	}
 	public static void testBench() throws UnsupportedDataTypeException{
 		Mat a;
