@@ -154,9 +154,7 @@ public class Mat {
 	public boolean equals(Object obj) {
 		if (obj.getClass() == this.getClass()) {
 			Mat o = (Mat) obj;
-			if (o.m == m && o.n == n) {
-				return Arrays.deepEquals(mat, o.mat);
-			}
+			return Arrays.deepEquals(mat, o.mat);
 		}
 		return false;
 	}
