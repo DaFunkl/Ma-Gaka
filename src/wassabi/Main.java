@@ -6,9 +6,28 @@ import javax.activation.UnsupportedDataTypeException;
 
 public class Main {
 	public static void main(String[] args) {
-		
 		gausTest();
-				
+		
+	}
+
+	public static void invTest(){
+//		Mat a  = new Mat(new int[]{1,0,2});
+//		System.out.println(a.toString());
+//		System.out.println(a.identity(3));
+//				
+		Mat a = randoMat(3, 3, -5, 5);
+//		Mat a = new Mat(new double[][]{
+//			{5,4},
+//			{3,2}
+//		});
+
+//		Mat a = new Mat(new int[]{1,0,3,2});
+		System.out.println(a);
+		a=a.inv(false);
+		System.out.println(a);
+		a=a.inv(false);
+		System.out.println(a);
+		
 	}
 	
 	public static void gausTest(){
@@ -17,7 +36,7 @@ public class Main {
 		Gaus g = Gaus.calculateGaus(a, Mat.identity(3));
 		System.out.println(g);
 	}
-
+	
 	public static Mat randoMat(int x, int y, int min, int max) {
 		Mat a = new Mat(y,x);
 		for (int i = 0; i < y; i++) {
