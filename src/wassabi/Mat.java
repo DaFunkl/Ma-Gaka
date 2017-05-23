@@ -60,28 +60,25 @@ public class Mat {
 	 * 
 	 * @param b
 	 * @return
-	 * @throws UnsupportedDataTypeException 
+	 * @throws UnsupportedDataTypeException
 	 */
-	
+
 	public Mat mult(Mat b) throws UnsupportedDataTypeException {
-		if(this.n != b.m)
-			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
-		Mat c = new Mat(this.m,b.n);
-		
-		
-		//slow, very slow
-		for(int k = 0;k < this.n;k++){
-		for (int i = 0; i<this.m;i++){
-			for(int j = 0 ;j < b.n;j++){
-					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
+		if (this.n != b.m)
+			throw new UnsupportedDataTypeException("Wrong dimensions " + this.n + " != " + b.m);
+		Mat c = new Mat(this.m, b.n);
+
+		// slow, very slow
+		for (int k = 0; k < this.n; k++) {
+			for (int i = 0; i < this.m; i++) {
+				for (int j = 0; j < b.n; j++) {
+					c.mat[i][j] += this.mat[i][k] * b.mat[k][j];
 				}
 			}
 		}
 		return c;
 	}
-	
 
-	
 	/**
 	 * creates identity matrix with this matrix dimensions
 	 * 
@@ -132,9 +129,7 @@ public class Mat {
 	public boolean equals(Object obj) {
 		if (obj.getClass() == this.getClass()) {
 			Mat o = (Mat) obj;
-			if (o.m == m && o.n == n) {
-				return Arrays.deepEquals(mat, o.mat);
-			}
+			return Arrays.deepEquals(mat, o.mat);
 		}
 		return false;
 	}
