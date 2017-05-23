@@ -6,45 +6,67 @@ public class Gaus {
 	Mat rM;
 	Mat aM;
 	Mat pM;
-	Mat bV;
+	Mat bM;
 	
 	private Gaus(){
 		super();
 	}
-
-	public static Gaus calculateGaus(Mat a, Mat b) {
-		Mat ai = new Mat(a);
-		Mat bi = new Mat(b);
-		for (int i = 0; i < ai.m; i++) {
-			System.out.println("Schritt "+i+":\n"+ ai);
+	
+	public static Gaus l_r_Gaus(Mat a, Mat b){
+		Mat aM = new Mat(a);
+		Mat bM = new Mat(b);
+		Mat pM = Mat.identity(a.m);
+		Mat lM = new Mat(a.m,a.m);
+		
+		for (int i = 0; i < aM.m; i++) {
 			// Pivotsuche:
-			double pivot = Math.abs(ai.mat[i][i]);
+			double pivot = Math.abs(aM.mat[i][i]);
 			int maxindex = i;
-			for (int index = i; index < ai.m; index++) {
-				if (pivot < Math.abs(ai.mat[index][i])){
-					pivot = Math.abs(ai.mat[index][i]);
+			for (int index = i; index < aM.m; index++) {
+				if (pivot < Math.abs(aM.mat[index][i])){
+					pivot = Math.abs(aM.mat[index][i]);
 					maxindex = index;
 				}
 			}
-			ai.swapLine(i, maxindex);
-			bi.swapLine(i, maxindex);
-			// lM/rM.swap
+			aM.swapLine(i, maxindex);
+			bM.swapLine(i, maxindex);
+			pM.swapLine(i, maxindex);
+			lM.swapLine(i, maxindex);
 
 			// Elimination
-			for (int index = i + 1; index < ai.m; index++) {
-				double l = ai.mat[index][i] / ai.mat[i][i];
+			for (int index = i + 1; index < aM.m; index++) {
+				double l = aM.mat[index][i] / aM.mat[i][i];
+				lM.mat[index][i] = l;
 				// l->lM
-				ai.mat[index][i] = 0;
-				for (int k = i + 1; k < ai.n; k++) {
-					ai.mat[index][k] -= ai.mat[i][k] * l;
+				aM.mat[index][i] = 0;
+				for (int k = i + 1; k < aM.n; k++) {
+					aM.mat[index][k] -= aM.mat[i][k] * l;
 				}
-				for (int k = 0; k < bi.n; k++) {
-					bi.mat[index][k] -= bi.mat[i][k] * l;
+				for (int k = 0; k < bM.n; k++) {
+					bM.mat[index][k] -= bM.mat[i][k] * l;
 				}
 				// for switch l
 			}
 			
 		}
+		
+		for(int i = 0; i < lM.m;i++){
+			lM.mat[i][i] = 1;
+		}
+		Mat rM = new Mat (aM);// save a to r;
+		Gaus g = new Gaus();
+		g.aM = aM;
+		g.bM = bM;
+		g.lM = lM;
+		g.rM = rM;
+		g.pM = pM;
+		return g;
+	}
+
+	public static Gaus calculateGaus(Mat a, Mat b) {
+		Gaus g = Gaus.l_r_Gaus(a, b);
+		Mat ai = g.aM;
+		Mat bi = g.bM;
 		
 		// save a to r;
 		// save l;
@@ -63,9 +85,8 @@ public class Gaus {
 			}
 
 		}
-		Gaus g = new Gaus();
-		g.aM = ai;
-		g.bV = bi;
+		g.aM = new Mat(a);
+		g.bM = bi;
 		return g;
 	}
 
@@ -78,8 +99,8 @@ public class Gaus {
 			System.out.println("P:\n"+pM);
 		if (aM != null)
 			System.out.println("A:\n"+aM);
-		if (bV != null)
-			System.out.println("B:\n"+bV);
+		if (bM != null)
+			System.out.println("B:\n"+bM);
 
 		return null;
 

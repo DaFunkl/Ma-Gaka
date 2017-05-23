@@ -7,38 +7,45 @@ import javax.activation.UnsupportedDataTypeException;
 public class Main {
 	public static void main(String[] args) {
 		gausTest();
-		
+
 	}
 
-	public static void invTest(){
-//		Mat a  = new Mat(new int[]{1,0,2});
-//		System.out.println(a.toString());
-//		System.out.println(a.identity(3));
-//				
+	public static void invTest() {
+		// Mat a = new Mat(new int[]{1,0,2});
+		// System.out.println(a.toString());
+		// System.out.println(a.identity(3));
+		//
 		Mat a = randoMat(3, 3, -5, 5);
-//		Mat a = new Mat(new double[][]{
-//			{5,4},
-//			{3,2}
-//		});
+		// Mat a = new Mat(new double[][]{
+		// {5,4},
+		// {3,2}
+		// });
 
-//		Mat a = new Mat(new int[]{1,0,3,2});
+		// Mat a = new Mat(new int[]{1,0,3,2});
 		System.out.println(a);
-		a=a.inv(false);
+		a = a.inv(false);
 		System.out.println(a);
-		a=a.inv(false);
+		a = a.inv(false);
 		System.out.println(a);
-		
+
 	}
-	
-	public static void gausTest(){
-		double[][] p = new double[][]{{1.0,2.0,0.0},{2.0,4.0,1.0},{2.0,1.0,0.0}};
+
+	public static void gausTest() {
+		double[][] p = new double[][] { { 1.0, 2.0, 0.0 }, { 2.0, 4.0, 1.0 }, { 2.0, 1.0, 0.0 } };
 		Mat a = new Mat(p);
 		Gaus g = Gaus.calculateGaus(a, Mat.identity(3));
 		System.out.println(g);
+		try {
+			System.out.println(g.pM.mult(a));
+			System.out.println(g.lM.mult(g.rM));
+		} catch (UnsupportedDataTypeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public static Mat randoMat(int x, int y, int min, int max) {
-		Mat a = new Mat(y,x);
+		Mat a = new Mat(y, x);
 		for (int i = 0; i < y; i++) {
 			for (int j = 0; j < x; j++) {
 				a.mat[i][j] = (int) (ThreadLocalRandom.current().nextInt(min, max + 1));
