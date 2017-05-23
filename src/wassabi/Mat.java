@@ -1,10 +1,7 @@
 package wassabi;
 
-<<<<<<< HEAD
 import java.util.Arrays;
-=======
 import javax.activation.UnsupportedDataTypeException;
->>>>>>> 5ed7ef66bde92a156988333b207c9a77765de7a8
 
 /**
  * 

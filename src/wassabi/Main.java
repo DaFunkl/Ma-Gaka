@@ -3,13 +3,10 @@ package wassabi;
 import javax.activation.UnsupportedDataTypeException;
 
 public class Main {
-<<<<<<< HEAD
 	public static void main(String[] args) {
 		Mat a  = new Mat(new int[]{1,0,2});
 		System.out.println(a.toString());
 		System.out.println(a.identity(3));
-=======
-	public static void main(String[] args) throws UnsupportedDataTypeException {
 				
 	}
 	public static void testBench() throws UnsupportedDataTypeException{
@@ -57,11 +54,5 @@ public class Main {
 		System.out.println(ct);
 		System.out.println(dt);
 		System.out.println(et);
-<<<<<<< HEAD
-		
->>>>>>> 5ed7ef66bde92a156988333b207c9a77765de7a8
-=======
-
->>>>>>> 6c3d68bfcec19718c26ad0fef8cdd170d76ff6b8
 	}
 }
