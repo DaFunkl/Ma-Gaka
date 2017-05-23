@@ -7,6 +7,10 @@ public class Gaus {
 	Mat aM;
 	Mat pM;
 	Mat bV;
+	
+	private Gaus(){
+		super();
+	}
 
 	public static Gaus calculateGaus(Mat a, Mat b) {
 		Mat ai = new Mat(a);
