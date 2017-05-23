@@ -6,6 +6,7 @@ import javax.activation.UnsupportedDataTypeException;
 
 public class Main {
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		
 	}
 
@@ -26,7 +27,18 @@ public class Main {
 		System.out.println(a);
 		a=a.inv(false);
 		System.out.println(a);
+=======
+>>>>>>> a3ee1592a7baa31befdcc7ee92a36367836df164
 		
+		gausTest();
+				
+	}
+	
+	public static void gausTest(){
+		double[][] p = new double[][]{{1.0,2.0,0.0},{2.0,4.0,1.0},{2.0,1.0,0.0}};
+		Mat a = new Mat(p);
+		Gaus g = Gaus.calculateGaus(a, Mat.identity(3));
+		System.out.println(g);
 	}
 	
 	public static Mat randoMat(int x, int y, int min, int max) {

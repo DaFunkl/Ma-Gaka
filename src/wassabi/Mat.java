@@ -10,9 +10,9 @@ import javax.activation.UnsupportedDataTypeException;
  *         mat is represented as m x n Matrix --> int[m][n]
  */
 public class Mat {
-	int n;
-	int m;
-	double[][] mat;
+	final int n;
+	final int m;
+	final double[][] mat;
 
 	/**
 	 * constructor empty m x n matrix
@@ -53,6 +53,16 @@ public class Mat {
 		for (int x : p) {
 			mat[i++][x] = 1;
 		}
+	}
+
+	public Mat(Mat a) {
+		double[][] mat = new double[a.mat.length][];
+		for(int i = 0; i < a.mat.length;i++){
+			mat[i] = a.mat[i].clone();
+		}
+		this.mat = mat;
+		m = a.m;
+		n = a.n;
 	}
 
 	/**
@@ -152,5 +162,11 @@ public class Mat {
 			return Arrays.deepEquals(mat, o.mat);
 		}
 		return false;
+	}
+
+	public void swapLine(int i, int i2) {
+		double[] line = mat[i];
+		mat[i] = mat[i2];
+		mat[i2] = line;
 	}
 }
