@@ -6,7 +6,7 @@ import javax.activation.UnsupportedDataTypeException;
 
 public class Main {
 	public static void main(String[] args) {
-<<<<<<< HEAD
+		gausTest();
 		
 	}
 
@@ -27,11 +27,7 @@ public class Main {
 		System.out.println(a);
 		a=a.inv(false);
 		System.out.println(a);
-=======
->>>>>>> a3ee1592a7baa31befdcc7ee92a36367836df164
 		
-		gausTest();
-				
 	}
 	
 	public static void gausTest(){
