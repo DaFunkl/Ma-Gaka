@@ -36,7 +36,7 @@ public class Mat {
 	public Mat(double[][] mat) {
 		this.mat = mat;
 		this.m = mat.length;
-		this.n = mat[1].length;
+		this.n = mat[0].length;
 	}
 
 	/**
@@ -99,30 +99,25 @@ public class Mat {
 	 * @param n
 	 * @return
 	 */
-	public Mat inv() {
+	public Mat inv(boolean debug) {
 		double[][] x = mat;
 		Mat p = identity(n);
-		double u;
-		double d;
-		for (int i = 0; i < n; i++) { // traversing top -> down
+		double u; // represents current multiplikator
+		double d; // represents multiplikator of row
+		for (int i = 0; i < m; i++) { // traversing top -> down
 			u = x[i][i];
-			for (int k = 0; k < n - 1; k++) { // creating zeros
+			for (int k = 0; k < m; k++) { // creating zeros
 				d = x[k][i];
-				if (d == 0)
-					break;
-				for (int j = 0; j < m; j++) { // applying to complete row
-					if (i != k) { // not needed to deploy calc to same row
-						// only start applying to x at width equals to current
-						// row
-						if (j >= i) {
-							x[k][j] = (x[i][j] * d * -1) + (x[k][j] * u);
-						}
-						p.mat[k][j] = (p.mat[i][j] * d * -1) + (p.mat[k][j] * u);
-					} else
-						break;
-					System.out.println("p:\n" + p.toString());
-					System.out.println("x:\n" + matString(x, m, n));
-
+				if (u * d > 0)
+					d *= -1;
+				if (d == 0 || k == i) {
+					continue;
+				}
+				for (int j = 0; j < n; j++) { // applying to complete row
+					if (j >= i) {
+						x[k][j] = (x[i][j] * d) + (x[k][j] * u);
+					}
+					p.mat[k][j] = (p.mat[i][j] * d) + (p.mat[k][j] * u);
 				}
 			}
 		}
