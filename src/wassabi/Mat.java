@@ -65,41 +65,8 @@ public class Mat {
 	 * @return
 	 * @throws UnsupportedDataTypeException 
 	 */
-	public Mat multA(Mat b) throws UnsupportedDataTypeException {
-		if(this.n != b.m)
-			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
-		Mat c = new Mat(this.m,b.n);
-		
-		
-		//slow, very slow
-		for (int i = 0; i<this.m;i++){
-			for(int j = 0 ;j < b.n;j++){
-				for(int k = 0;k < this.n;k++){
-					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
-				}
-			}
-		}
-		return c;
-	}
 	
-	public Mat multB(Mat b) throws UnsupportedDataTypeException {
-		if(this.n != b.m)
-			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
-		Mat c = new Mat(this.m,b.n);
-		
-		
-		//slow, very slow
-		for(int k = 0;k < this.n;k++){
-			for(int j = 0 ;j < b.n;j++){
-				for (int i = 0; i<this.m;i++){
-					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
-				}
-			}
-		}
-		return c;
-	}
-	
-	public Mat multC(Mat b) throws UnsupportedDataTypeException {
+	public Mat mult(Mat b) throws UnsupportedDataTypeException {
 		if(this.n != b.m)
 			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
 		Mat c = new Mat(this.m,b.n);
@@ -116,39 +83,7 @@ public class Mat {
 		return c;
 	}
 	
-	public Mat multD(Mat b) throws UnsupportedDataTypeException {
-		if(this.n != b.m)
-			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
-		Mat c = new Mat(this.m,b.n);
-		
-		
-		//slow, very slow
-		for (int i = 0; i<this.m;i++){
-			for(int k = 0;k < this.n;k++){
-				for(int j = 0 ;j < b.n;j++){
-					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
-				}
-			}
-		}
-		return c;
-	}
 
-	public Mat multE(Mat b) throws UnsupportedDataTypeException {
-		if(this.n != b.m)
-			throw new UnsupportedDataTypeException("Wrong dimensions "+this.n+" != "+ b.m);
-		Mat c = new Mat(this.m,b.n);
-		
-		
-		//slow, very slow
-		for(int j = 0 ;j < b.n;j++){
-			for(int k = 0;k < this.n;k++){
-				for (int i = 0; i<this.m;i++){
-					c.mat[i][j] += this.mat[i][k]*b.mat[k][j]; 
-				}
-			}
-		}
-		return c;
-	}
 	
 	/**
 	 * creates identity matrix with this matrix dimensions
