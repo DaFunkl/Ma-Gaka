@@ -1,11 +1,12 @@
 package wassabi;
 
-import java.util.Arrays;
-
 import javax.activation.UnsupportedDataTypeException;
 
 public class Main {
 	public static void main(String[] args) throws UnsupportedDataTypeException {
+				
+	}
+	public static void testBench() throws UnsupportedDataTypeException{
 		Mat a;
 		Mat b;
 		a = new Mat(100, 100);
@@ -19,20 +20,19 @@ public class Main {
 		          
 		for(int k = 0; k < 1000;k++){
 
-			for(int i = 0;i<50;i++){
+			for(int i = 0;i<100;i++){
 				for(int j = 0; j < 50; j++){
 					a.mat[i][j] = (int) (Math.random()-0.5 * Integer.MAX_VALUE);
 					b.mat[i][j] = (int) (Math.random()-0.5 * Integer.MAX_VALUE);
 				}	
 			}
-			Arrays.deepEquals(a.mat, b.mat);
-			
+			/*
 			long nanoTime0 = System.nanoTime();
-			a.multA(b);
+			//a.multA(b);
 			long nanoTimeA = System.nanoTime();
-			a.multB(b);
+			//a.multB(b);
 			long nanoTimeB = System.nanoTime();
-			a.multC(b);
+			//a.multC(b);
 			long nanoTimeC = System.nanoTime();
 			a.multD(b);
 			long nanoTimeD = System.nanoTime();
@@ -43,7 +43,7 @@ public class Main {
 			ct = (nanoTimeC - nanoTimeB)/1000.0;
 			dt = (nanoTimeD - nanoTimeC)/1000.0;
 			et = (nanoTimeE - nanoTimeD)/1000.0;
-			
+			*/
 		}
 		
 		System.out.println(at);
@@ -51,6 +51,6 @@ public class Main {
 		System.out.println(ct);
 		System.out.println(dt);
 		System.out.println(et);
-		
+
 	}
 }
