@@ -10,8 +10,9 @@ public class Mat {
 		mat = new int[i][i];
 	}
 
-	public Mat(int n, int[][] m) {
-		this.mat = m;
+	public Mat(int n, int m, int[][] mat) {
+		this.mat = mat;
+		this.m = m;
 		this.n = n;
 	}
 
@@ -25,12 +26,22 @@ public class Mat {
 	}
 
 	public Mat mult(Mat b) {
-		for(int i ){
-			
-		}
+		// asdasdasdad nonsesensensnesnense
+		Mat ret = new Mat(b.mat[0]);
+		
+		
+		return ret;
 	}
 
 	public Mat inv() {
+		int [][] x = mat;
+		int[] px = new int[n];
+		for(int i = 0; i < n; i++){
+			px[i] = i;
+		}
+		// das ist die Einheitsmatrix, welche umgeformt werden soll, sodass das inverse entsteht
+		Mat p = new Mat(px);
 		
+		return p;
 	}
 }
